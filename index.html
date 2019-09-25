@@ -159,16 +159,16 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-javascript的一些学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-微型框架目录结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="javascript的一些学习"><a href="#javascript的一些学习" class="headerlink" title="javascript的一些学习"></a>javascript的一些学习</h2><h4 id="因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、"><a href="#因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、" class="headerlink" title="因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、"></a>因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、</h4><p>1.document.getElementById(“ID”).innerHTML实现对html文档内容(<strong>ID属性</strong>)的补充或替换</p>
-<p>2.document.write()方法可以实现，需要注意的是，document.write()函数如果在html加载完之后使用的话，会降所有html文档显示的内容清除掉</p>
-<p>3.第三种就是window.alert()的方式，也就是触发弹窗</p>
-<p>4.第四种就是console.log()方法，也就是在控制台的console中显示</p>
-<p>#### </p>
+        <p>微型框架目录结构</p>
+<p>1.函数库</p>
+<p>2.类库（1.视图引擎库   2.DB引擎库  3. 核心库）</p>
+<p>3.require文件清单</p>
+<p>4.启动引擎程序</p>
 
       
 
@@ -181,7 +181,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/24/javascript的一些学习/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/09/25/微型框架目录结构/">展开全文 >></a>
         </p>
       
 
@@ -211,39 +211,67 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-控制器方法的空操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/24/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/24/hello-world/" class="archive-article-date">
-  	<time datetime="2019-09-24T11:34:42.289Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>控制器方法的空操作</p>
+<p>空操作是指系统在找不到指定的操作方法的时候，会定位到空操作(_empty)方法来执行</p>
+<p>简单来说就是，你在URL最后传方法名的时候，实际传输的那个方法名不存在那个方法</p>
+<p>这时，系统会调用_empty方法来执行，传输的方法名会作为_empty方法的参数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">index</span>\<span class="title">controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">City</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">_empty</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//把所有城市的操作解析到city方法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;showCity($name);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//注意 showCity方法 本身是 protected 方法</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">showCity</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//和$name这个城市相关的处理</span></span><br><span class="line">         <span class="keyword">return</span> <span class="string">'当前城市'</span> . $name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/25/控制器方法的空操作/">展开全文 >></a>
+        </p>
+      
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-控制器的页面跳转以及重定向" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>控制器的页面跳转以及重定向</p>
+<p>1.系统内部\think\Controller类内置了两个跳转方法success和error，用于页面跳转提示</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">index</span>\<span class="title">controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">app</span>\<span class="title">index</span>\<span class="title">model</span>\<span class="title">User</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $User = <span class="keyword">new</span> User; <span class="comment">//实例化User对象</span></span><br><span class="line">        $result = $User-&gt;save($data); </span><br><span class="line">        <span class="keyword">if</span>($result)&#123;</span><br><span class="line">            <span class="comment">//设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;success(<span class="string">'新增成功'</span>, <span class="string">'User/list'</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//错误页面的默认跳转页面是返回前一页，通常不需要设置</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;error(<span class="string">'新增失败'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2。可以使用think\Controller的redirect操作实现URL重定向，重定向会改变URL地址，可以使用remember()函数实现记住URL跳跃的功能。</p>
 
       
 
@@ -256,7 +284,226 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/24/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/09/25/控制器的页面跳转以及重定向/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-控制器的初始化以及前置操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.控制器的初始化</p>
+<p>如果控制器继承了\think\Controller类，可以定义控制器初始化方法_initialize方法，在控制器的方法调用之前首先执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public function _initialize()&#123;</span><br><span class="line"></span><br><span class="line">​	echo &apos;init&lt;br\&gt;&apos;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在下面的方法执行之后，这段代码也会被执行，打印init并换行。</p>
+<p>2.控制器的前置操作</p>
+<p>设置beforeActionList属性可以执行摸个方法为其他方法的前置操作，数组键名为需要调用的前值方法名，无值的话为当前控制器上所有方法的前置方法。</p>
+<p>[‘except’ =&gt; ‘方法名，方法名’] 表示这些方法不适用前置方法</p>
+<p>[‘only’  =&gt; ‘方法名’，方法名]表示只有这些方法使用前置方法。</p>
+<p>注意，这对驼峰阀定义的文件无效。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">index</span>\<span class="title">controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $beforeActionList = [</span><br><span class="line">        <span class="string">'first'</span>,</span><br><span class="line">        <span class="string">'second'</span> =&gt;  [<span class="string">'except'</span>=&gt;<span class="string">'hello'</span>],</span><br><span class="line">        <span class="string">'three'</span>  =&gt;  [<span class="string">'only'</span>=&gt;<span class="string">'hello,data'</span>],</span><br><span class="line">    ];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">first</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'first&lt;br/&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">second</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'second&lt;br/&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">three</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'three&lt;br/&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hello</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'hello'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">data</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'data'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/25/控制器的初始化以及前置操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-继承和重写和JAVA的用处差不多" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>继承和重写和JAVA的用处差不多</p>
+<p>1.子类中编写和父类方法名完全一致的方法可以完成对父类方法的重写</p>
+<p>2.对于不想被任何类继承的类可以在class之前添加final关键字</p>
+<p>3.对于不想被子类重写的方法，可以再方法定义的前面添加final关键字</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/25/继承和重写和JAVA的用处差不多/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-VIEW层架构的一点东西---1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>VIEW层架构的一点东西—1</p>
+<p>利用cookie完成用户登录</p>
+<p>1.在用户登录的时候，首先判断这个用户名是否存在登录的cookie</p>
+<p>如果不存在，首先判断这个用户是不是在数据库中</p>
+<p>查询数据表，在数据表中能且只能找到一条此用户名的记录</p>
+<p>那么，给这个用户设置cookie，利用header(‘location:’.xxx.php)转到界面，注意，和JAVA不同的是，当前页面的剩余代码依旧会执行。</p>
+<p>如果在数据库中找不到或者找到多条记录等情况，直接判断无效，跳转到登录界面，请求重新登录</p>
+<p>如果存在这个cookie，那么直接转向到登入后的界面</p>
+<p>2.在登入后的界面，接受传的cookie用户名，同时有注销登录的选项</p>
+<p>那么注销登录的界面就是注销cookie并转向登录界面，注销cookie只需要讲cookie的时间改到过去就好了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/25/VIEW层架构的一点东西---1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-javascript的一些学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="javascript的一些学习"><a href="#javascript的一些学习" class="headerlink" title="javascript的一些学习"></a>javascript的一些学习</h2><h4 id="因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、"><a href="#因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、" class="headerlink" title="因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、"></a>因为javascript提供任何内建的打印或显示函数，目前有四种方法可以实现打印、</h4><p>1.document.getElementById(“ID”).innerHTML实现对html文档内容(<strong>ID属性</strong>)的补充或替换</p>
+<p>2.document.write()方法可以实现，需要注意的是，document.write()函数如果在html加载完之后使用的话，会降所有html文档显示的内容清除掉</p>
+<p>3.第三种就是window.alert()的方式，也就是触发弹窗</p>
+<p>4.第四种就是console.log()方法，也就是在控制台的console中显示</p>
+<p>#### </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/24/javascript的一些学习/">展开全文 >></a>
         </p>
       
 
