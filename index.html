@@ -159,6 +159,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Thinkphp中field的用法小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Thinkphp中field的用法小结"><a href="#Thinkphp中field的用法小结" class="headerlink" title="Thinkphp中field的用法小结"></a>Thinkphp中field的用法小结</h3><p>1.用于查询：</p>
+<p>​    </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$Model::field(<span class="string">'id'</span>,<span class="string">'UserName'</span>,<span class="string">'Password'</span>)-&gt;select();</span><br></pre></td></tr></table></figure>
+
+<p>  这段代码相当于</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>,UserName,<span class="keyword">Password</span> <span class="keyword">FROM</span>  <span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当然，field可以应用于数组等查询</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$Model::field(<span class="keyword">array</span>(<span class="string">'id'</span>,<span class="string">'UserName'</span>=&gt;<span class="string">'Name'</span>,<span class="string">'Password'</span>))-&gt;select();</span><br></pre></td></tr></table></figure>
+
+<p>这段话相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>,UserName <span class="keyword">as</span> <span class="keyword">Name</span>,<span class="keyword">Password</span> <span class="keyword">FROM</span> <span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
+
+<p>同时，field具有筛选数据的功能,例如</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$Model-&gt;select();</span><br><span class="line"></span><br><span class="line">$Model-&gt;field()-&gt;select();</span><br><span class="line"></span><br><span class="line">$Model-&gt;field(<span class="string">'*'</span>)-&gt;select();</span><br></pre></td></tr></table></figure>
+
+<p>以上都为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
+
+<p>那么帅选的方法在于filed(‘字段’,true)即表示现实的字段为括号里的字段</p>
+<p>例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$Model-&gt;field(<span class="string">'content'</span>,<span class="keyword">true</span>)-&gt;select();</span><br></pre></td></tr></table></figure>
+
+<p>这样子就会排除除content之外的所有值，可以一次显示多个字段</p>
+<p>或者利用数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$Model-&gt;field(array(&apos;id&apos;,&apos;content&apos;),true)-&gt;select();</span><br></pre></td></tr></table></figure>
+
+<p>这个等同于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$Model-&gt;field(&apos;content,id&apos;,true)-&gt;select();</span><br></pre></td></tr></table></figure>
+
+<p>2.用于写入：</p>
+<p>​    field配合create插入数据方法可以完成对表单提交的字段合法性检测</p>
+<p>​    例如：</p>
+<p>​    $Model-&gt;field(‘title,email,content’)-&gt;create();</p>
+<p>以上内容来自于对<a href="http://www.thinkphp.cn/info/163.html这篇文章的学习！" target="_blank" rel="noopener">http://www.thinkphp.cn/info/163.html这篇文章的学习！</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/21/Thinkphp中field的用法小结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-AJAX学习遇到的一些问题和解决办法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
