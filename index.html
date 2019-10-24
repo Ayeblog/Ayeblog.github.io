@@ -159,6 +159,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-对tp5关于视图，模板方面的学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="对tp5关于视图，模板方面的学习"><a href="#对tp5关于视图，模板方面的学习" class="headerlink" title="对tp5关于视图，模板方面的学习"></a>对tp5关于视图，模板方面的学习</h4><h5 id="一般使用fetch方法来对模板进行输出"><a href="#一般使用fetch方法来对模板进行输出" class="headerlink" title="一般使用fetch方法来对模板进行输出"></a>一般使用fetch方法来对模板进行输出</h5><p>例如</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="keyword">$this</span>-&gt;fetch();</span><br></pre></td></tr></table></figure>
+
+<p>这种方法来转到模板进行输出</p>
+<ol>
+<li>fetch()方法如果没有参数，则表示转到<strong>当前控制器下/view文件夹下/当前类名/当前方法名</strong> 的这样一个文件</li>
+<li>fetch(x)表示文件的名字是x,文件的后缀在template（config.php配置文件）中进行配置，一般默认是html</li>
+<li>fetch(x/y)表示文件的相对位置是x/y.html，也就是文件名是y.html，上一级目录是x</li>
+<li>fetch() 第二个参数可以是一个数组，表示对模板页面的输出</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="keyword">$this</span>-&gt;fetch(<span class="string">'demo/view'</span>,<span class="string">'$data'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>模板页面: {$data}就可以接受数组</p>
+<h5 id="现在一般使用assign-方法来对模板页面进行赋值"><a href="#现在一般使用assign-方法来对模板页面进行赋值" class="headerlink" title="现在一般使用assign()方法来对模板页面进行赋值"></a>现在一般使用assign()方法来对模板页面进行赋值</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;assign(<span class="string">'name'</span>,<span class="string">'value'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这样子就可以把变量传输到模板页面，</p>
+<p>模板页面依旧用{$name}就可以接收到。</p>
+<p>session,app_path,gei,request等一些系统变量，可以直接在模板页面打印，{$Think.APP_PATH}等等</p>
+<p>模板前台页面可以在接收参数的同时利用管道符进行函数的运算，例如：</p>
+<p>{$name|md5|substr=0,5}这个就表示将name变量接收的同时进行MD5加密，并取前五位</p>
+<p>同样，不只是函数，也支持数学运算以及逻辑判断，包括三元运算符</p>
+<h5 id="模板的布局，继承以及包含文件"><a href="#模板的布局，继承以及包含文件" class="headerlink" title="模板的布局，继承以及包含文件"></a>模板的布局，继承以及包含文件</h5><h6 id="布局的话，首先要开启layout-on以及layout-name（这些都在config-php的template中）"><a href="#布局的话，首先要开启layout-on以及layout-name（这些都在config-php的template中）" class="headerlink" title="布局的话，首先要开启layout_on以及layout_name（这些都在config.php的template中）"></a>布局的话，首先要开启layout_on以及layout_name（这些都在config.php的template中）</h6><p>开启的话，就可以使用全面布局，布局的默认地址是在控制器文件夹同级的view文件夹下面</p>
+<p>在那里创建layout.html（layout.html是你template中设置的layout_name）</p>
+<p>这样子，我们就只需要在layout.html中写入页面前台代码，在想布局的地方用{<strong>__</strong>CONTENT_______}</p>
+<p>进行类似占位的功能</p>
+<p>在使用layout.html这个布局文件的页面中，单纯写入想替换的内容就好，这个内容也可以是标签</p>
+<p>这个标签内部包含文件，也可以是接收控制器的数据。</p>
+<h6 id="继承我理解成挖坑以及填坑的过程"><a href="#继承我理解成挖坑以及填坑的过程" class="headerlink" title="继承我理解成挖坑以及填坑的过程"></a>继承我理解成挖坑以及填坑的过程</h6><p>首先继承基页面</p>
+<p>{extend name=”base” /}</p>
+<p>之后挖坑就是在显示页面想显示的部分一个</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;block name=<span class="string">"name"</span>&#125;“内容是：”&#123;/block&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在使用界面，或者是基础页面，写上</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;block name=<span class="string">"name"</span>&#125; <span class="string">"内容"</span>&#123;/block&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后在显示页面就会在那个部分打印出“内容是：内容”</p>
+<p>包含文件就好理解很多了</p>
+<p>基文件就是一个部分标签</p>
+<p>使用{include file=”base.html”}就会将这部分标签引入到当前页面。</p>
+<p>至于那些内部标签之类的，后续会补上。</p>
+<p>##### </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/24/对tp5关于视图，模板方面的学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Thinkphp中field的用法小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
